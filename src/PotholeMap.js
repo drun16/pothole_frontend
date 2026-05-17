@@ -18,7 +18,7 @@ import {
 
 import L from "leaflet";
 
-import "./PotholeMap.css";
+import "./App.css";
 
 // Production backend
 const API_BASE =

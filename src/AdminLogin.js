@@ -1,7 +1,7 @@
 // AdminLogin.js
 
 import React, { useState } from "react";
-import "./AdminLogin.css";
+import "./App.css";
 
 // Production backend
 const API_BASE =

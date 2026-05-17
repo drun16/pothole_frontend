@@ -9,7 +9,7 @@ import React, {
 
 import Webcam from "react-webcam";
 
-import "./LiveCamera.css";
+import "./App.css";
 
 // Production backend
 const API_BASE =
