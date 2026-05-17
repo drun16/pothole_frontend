@@ -1,0 +1,386 @@
+/* App.css */
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  color: #FFD700; /* Road Yellow */
+  font-size: 3rem;
+  margin-bottom: 5px;
+}
+
+.header p {
+  color: #aaaaaa;
+  font-size: 1.2rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.upload-section, .results-section {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #333;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+}
+
+.upload-section h2, .results-section h2 {
+  color: #FFD700;
+  margin-top: 0;
+}
+
+.file-input {
+  margin: 20px 0;
+  color: #fff;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 2px dashed #FFD700;
+  margin-bottom: 20px;
+}
+
+.upload-btn {
+  background-color: #FFD700;
+  color: #121212;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #ffea00;
+  transform: scale(1.05);
+}
+
+.upload-btn:disabled {
+  background-color: #555;
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.highlight {
+  color: #FFD700;
+  font-size: 1.5rem;
+}
+
+.detection-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.detection-list li {
+  background-color: #2a2a2a;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 4px solid #FFD700;
+}
+
+.success {
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* 🆕 NEW: Startup UI Styles */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 15px 30px;
+  border-bottom: 2px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.nav-brand h1 {
+  color: #FFD700;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.nav-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-badge {
+  background-color: #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 1px solid #555;
+}
+
+.stat-badge span {
+  font-size: 1.1rem;
+  margin-left: 8px;
+}
+
+.stat-badge.fixed span { color: #4CAF50; }
+.stat-badge.pending span { color: #ff4d4d; }
+.stat-badge.total span { color: #FFD700; }
+
+.hero-section {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.hero-section h2 {
+  font-size: 3.5rem;
+  margin: 0 0 15px 0;
+  color: #ffffff;
+}
+
+.hero-section h2 span {
+  color: #FFD700;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #aaaaaa;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+}
+
+.circle-nav-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.circle-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.circle-btn-wrapper:hover {
+  transform: translateY(-10px);
+}
+
+.circle-btn {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #1e1e1e;
+  border: 3px solid #FFD700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.5rem;
+  box-shadow: 0 8px 16px rgba(255, 215, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.circle-btn-wrapper:hover .circle-btn {
+  background-color: #FFD700;
+  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.4);
+}
+
+.circle-btn-wrapper:hover .circle-icon {
+  filter: invert(1); /* Makes the emoji/icon dark on hover */
+}
+
+.circle-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.page-container {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------------------- */
+/* Video Player Styles */
+/* ----------------------------------- */
+.hero-video-container {
+  width: 100%;
+  max-width: 800px; /* Prevents it from getting too massive on huge monitors */
+  margin: 0 auto 40px auto; /* Centers the video and adds space below it */
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #FFD700; /* Wraps it in our signature road yellow */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  background-color: #000; /* Acts as a fallback color while the video loads */
+}
+
+.promo-video {
+  width: 100%;
+  display: block; /* Removes any weird spacing below the video */
+  aspect-ratio: 16 / 9; /* Ensures standard widescreen format */
+  object-fit: cover;
+}
+
+/* ----------------------------------- */
+/* Presentation Embed Styles */
+/* ----------------------------------- */
+.hero-presentation-container {
+  width: 100%;
+  max-width: 800px; /* Matches the video width perfectly */
+  margin: 0 auto 50px auto; 
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #555; /* Slightly subtler border than the video */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  aspect-ratio: 16 / 9; /* Forces the iframe to keep a cinematic widescreen shape */
+  background-color: #1a1a1a;
+}
+
+.promo-presentation {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Navbar adjustments */
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 10px;
+    text-align: center;
+  }
+
+  .nav-stats {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .stat-badge {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .stat-badge span {
+    font-size: 1rem;
+  }
+
+  /* Hero section adjustments */
+  .hero-section {
+    padding: 30px 10px 20px;
+  }
+
+  .hero-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  /* Circular Buttons adjustments */
+  .circle-nav-grid {
+    gap: 20px;
+  }
+
+  .circle-btn {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+    border-width: 2px;
+  }
+
+  .circle-label {
+    font-size: 1rem;
+  }
+
+  /* Upload & Map container adjustments */
+  .upload-section, .results-section {
+    padding: 20px 15px;
+    width: 90%;
+  }
+
+  .page-container {
+    padding: 20px 10px;
+  }
+
+  .map-container {
+    height: 400px !important; /* Slightly shorter map for mobile */
+  }
+  /* Inside @media (max-width: 768px) */
+  .hero-video-container {
+    width: 95%; /* Gives it a slight margin on small phone screens */
+    border-radius: 8px; /* Slightly softer corners for mobile */
+    margin-bottom: 25px;
+  }
+
+  /* Inside @media (max-width: 768px) */
+  .hero-presentation-container {
+    width: 95%; 
+    border-radius: 8px; 
+    margin-bottom: 30px;
+  }
+
+}
+
+/* Extra small devices (narrow phones) */
+@media (max-width: 480px) {
+  .circle-nav-grid {
+    gap: 15px;
+  }
+  
+  .circle-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+}
