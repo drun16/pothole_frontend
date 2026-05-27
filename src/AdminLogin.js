@@ -82,16 +82,17 @@ const AdminLogin = ({ onLoginSuccess }) => {
   // ================= UI =================
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', backgroundColor: '#1e1e1e', borderRadius: '12px', border: '2px solid #FFD700', textAlign: 'center', boxShadow: '0 8px 16px rgba(0,0,0,0.5)' }}>
 
-      <div className="login-card">
+      <div className="login-card"style={{ maxWidth: '400px', margin: '60px auto', padding: '30px', backgroundColor: '#1e1e1e', borderRadius: '12px', border: '2px solid #FFD700', textAlign: 'center', boxShadow: '0 8px 16px rgba(0,0,0,0.5)' }}>
+      
 
-        <h2>
+        <h2 style={{ color: '#FFD700', marginBottom: '20px' }}>
           Authority Login
         </h2>
 
         {error && (
-          <div className="error-box">
+          <div className="error-box" style={{ color: '#ff4d4d', marginBottom: '15px', fontWeight: 'bold' }}>
             {error}
           </div>
         )}
@@ -100,7 +101,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
           onSubmit={
             handleLogin
           }
-          className="login-form"
+          className="login-form" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
         >
 
           <input
@@ -119,6 +120,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
             }
 
             required
+            style={{ padding: '12px', borderRadius: '6px', border: '1px solid #555', backgroundColor: '#333', color: '#fff', fontSize: '1rem' }}
+        
           />
 
           <input
@@ -137,6 +140,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
             }
 
             required
+            style={{ padding: '12px', borderRadius: '6px', border: '1px solid #555', backgroundColor: '#333', color: '#fff', fontSize: '1rem' }}
+        
           />
 
           <button
@@ -145,6 +150,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
             disabled={
               loading
             }
+            style={{ padding: '12px', backgroundColor: '#FFD700', color: '#121212', fontWeight: 'bold', fontSize: '1.1rem', border: 'none', borderRadius: '6px', cursor: 'pointer', marginTop: '10px' }}
+        
           >
             {loading
               ? "Verifying..."

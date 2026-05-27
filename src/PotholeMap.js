@@ -421,8 +421,8 @@ const PotholeMap = ({
 
   return (
 
-    <div className="map-wrapper">
-
+    <div className="map-wrapper" style={{ position: 'relative', width: '100%', marginTop: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
       <button
         className="drive-btn"
 
@@ -440,10 +440,13 @@ const PotholeMap = ({
           : "🚗 Start Driving"}
 
       </button>
+      {isDriving && <span style={{ color: '#4CAF50', fontWeight: 'bold', animation: 'pulse 2s infinite' }}>📍 Live GPS Active</span>}
+      </div>
 
       {alertMessage && (
 
-        <div className="alert-box">
+        <div className="alert-box"style={{ position: 'absolute', top: '70px', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#ff4d4d', color: '#fff', padding: '15px 30px', borderRadius: '8px', zIndex: 1000, fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 8px 16px rgba(255, 77, 77, 0.4)', border: '2px solid #fff', textAlign: 'center', width: '80%', maxWidth: '400px' }}>
+       
 
           {alertMessage}
 
@@ -451,7 +454,8 @@ const PotholeMap = ({
 
       )}
 
-      <div className="map-box">
+      <div className="map-container" style={{ height: '500px', width: '100%', borderRadius: '12px', overflow: 'hidden', border: '2px solid #333' }}>
+        
 
         <MapContainer
 
@@ -481,7 +485,7 @@ const PotholeMap = ({
           />
 
           <TileLayer
-            attribution="OpenStreetMap"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />

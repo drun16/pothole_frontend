@@ -159,49 +159,47 @@ const AdminDashboard = ({ token }) => {
   // ================= UI =================
 
   return (
-    <div className="admin-dashboard">
+    <div className="admin-dashboard" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', color: '#fff' }}>
 
       {/* HEADER */}
 
-      <div className="dashboard-header">
+      <div className="dashboard-header" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto', color: '#fff' }} >
 
-        <h2>
-          Authority Dashboard
-        </h2>
-
-        <button
-          className="pdf-btn"
+        {/* 🆕 NEW: Header with the Download Button */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #333', paddingBottom: '10px' }}>
+        <h2 style={{ color: '#FFD700', margin: 0 }}>Authority Dashboard</h2>
+        <button 
           onClick={downloadPDF}
+          style={{ backgroundColor: '#FFD700', color: '#121212', border: 'none', padding: '10px 20px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer' }}
         >
-          📄 Download PDF
+          📄 Download PDF Report
         </button>
-
       </div>
 
       {/* STATS */}
 
-      <div className="stats-grid">
+      <div className="stats-grid" style={{ display: 'flex', gap: '20px', marginBottom: '30px', marginTop: '20px', flexWrap: 'wrap' }} >
 
-        <div className="stat-card">
+        <div style={{ flex: '1 1 200px', backgroundColor: '#1e1e1e', padding: '20px', borderRadius: '8px', textAlign: 'center', border: '1px solid #333' }}>
           <h3>Total Reports</h3>
 
-          <p className="gold">
+          <p className="gold" style={{ fontSize: '2rem', color: '#FFD700', margin: 0 }}>
             {metadata.total_reports}
           </p>
         </div>
 
-        <div className="stat-card">
-          <h3>Pending</h3>
+        <div style={{ flex: '1 1 200px', backgroundColor: '#1e1e1e', padding: '20px', borderRadius: '8px', textAlign: 'center', border: '1px solid #333' }}>
+          <h3>Potholes Fixed</h3>
 
-          <p className="red">
+          <p className="red" style={{ fontSize: '2rem', color: '#ff4d4d', margin: 0 }}>
             {metadata.total_pending}
           </p>
         </div>
 
-        <div className="stat-card">
-          <h3>Fixed</h3>
+        <div style={{ flex: '1 1 200px', backgroundColor: '#1e1e1e', padding: '20px', borderRadius: '8px', textAlign: 'center', border: '1px solid #333' }}>
+          <h3>Potholes Fixed</h3>
 
-          <p className="green">
+          <p className="green" style={{ fontSize: '2rem', color: '#4CAF50', margin: 0 }}>
             {metadata.total_fixed}
           </p>
         </div>
@@ -210,21 +208,18 @@ const AdminDashboard = ({ token }) => {
 
       {/* TABLE */}
 
-      <div className="table-container">
-
-        <table>
-
+      <div style={{ overflowX: 'auto', backgroundColor: '#1e1e1e', borderRadius: '8px', padding: '20px', border: '1px solid #333' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
-
-            <tr>
-              <th>Image</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Potholes</th>
-              <th>Depth</th>
-              <th>Location</th>
-              <th>Status</th>
-              <th>Action</th>
+            <tr style={{ borderBottom: '1px solid #444', color: '#aaaaaa' }}>
+              <th style={{ padding: '12px' }}>Image</th>
+              <th style={{ padding: '12px' }}>Date</th>
+              <th style={{ padding: '12px' }}>Time</th>
+              <th style={{ padding: '12px' }}>Potholes</th>
+              <th style={{ padding: '12px' }}>Depth</th>
+              <th style={{ padding: '12px' }}>Location</th>
+              <th style={{ padding: '12px' }}>Status</th>
+              <th style={{ padding: '12px' }}>Action</th>
             </tr>
 
           </thead>
@@ -234,9 +229,9 @@ const AdminDashboard = ({ token }) => {
             {reports.map(
               (report) => (
 
-              <tr key={report._id}>
+              <tr key={report._id} style={{ borderBottom: '1px solid #333' }}>
 
-                <td>
+                <td style={{ padding: '12px' }}>
 
                   {report.image_url ? (
 
@@ -249,10 +244,11 @@ const AdminDashboard = ({ token }) => {
 
                       className=
                         "report-image"
+                      style={{ width: '60px', height: '40px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #555' }}
                     />
 
                   ) : (
-                    "No Image"
+                    <span style={{ color: '#555', fontSize: '0.8rem' }}>No Image</span>
                   )}
 
                 </td>
@@ -265,7 +261,7 @@ const AdminDashboard = ({ token }) => {
 
                 </td>
 
-                <td>
+                <td style={{ padding: '12px' }}>
 
                   {new Date(
                     report.reported_at
@@ -334,15 +330,15 @@ const AdminDashboard = ({ token }) => {
                     }
                   >
 
-                    <option>
+                    <option value="Pending">
                       Pending
                     </option>
 
-                    <option>
+                    <option value="In Progress">
                       In Progress
                     </option>
 
-                    <option>
+                    <option value="Fixed">
                       Fixed
                     </option>
 
@@ -358,11 +354,11 @@ const AdminDashboard = ({ token }) => {
 
         </table>
 
-      </div>
+      
 
-      {/* PAGINATION */}
+        {/* PAGINATION */}
 
-      <div className="pagination">
+        <div className="pagination" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #444' }}>
 
         <button
           onClick={() =>
@@ -378,11 +374,11 @@ const AdminDashboard = ({ token }) => {
           ← Previous
         </button>
 
-        <span>
+        <span style={{ color: '#aaaaaa' }}>
 
-          Page {
+          Page<strong style={{ color: '#FFD700' }}> {
             metadata.current_page
-          } of {
+          }</strong> of {
             metadata.total_pages
           }
 
@@ -399,12 +395,16 @@ const AdminDashboard = ({ token }) => {
                 )
             )
           }
+          disabled={currentPage === metadata.total_pages || metadata.total_pages === 0}
+            style={{ padding: '8px 16px', backgroundColor: currentPage === metadata.total_pages || metadata.total_pages === 0 ? '#333' : '#FFD700', color: currentPage === metadata.total_pages || metadata.total_pages === 0 ? '#888' : '#121212', border: 'none', borderRadius: '4px', cursor: currentPage === metadata.total_pages || metadata.total_pages === 0 ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}
+          
         >
           Next →
         </button>
 
       </div>
-
+    </div>
+    </div>
     </div>
   );
 };

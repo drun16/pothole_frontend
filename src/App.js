@@ -180,14 +180,14 @@ function App() {
           className="nav-brand"
           onClick={() => setCurrentPage("home")}
         >
-          <span>🚧</span>
+          <span style={{ fontSize: '1.8rem' }}>🚧</span>
           <h1>Pothole Patrol</h1>
         </div>
 
         <div className="nav-stats">
-          <div>Total: {globalStats.total}</div>
-          <div>Fixed: {globalStats.fixed}</div>
-          <div>Pending: {globalStats.pending}</div>
+          <div className="stat-badge total">Total: {globalStats.total}</div>
+          <div className="stat-badge fixed">Fixed: {globalStats.fixed}</div>
+          <div className="stat-badge pending">Pending: {globalStats.pending}</div>
         </div>
 
       </nav>
@@ -203,27 +203,65 @@ function App() {
             <h2>
               Making Roads <span>Safer</span> with AI
             </h2>
+            <p>Our smart platform detects, maps, and reports road hazards in real-time. Choose a module below to get started.</p>
 
             <div className="circle-nav-grid">
 
-              <div onClick={() => setCurrentPage("upload")}>
-                📤 Manual Report
+              <div className="circle-btn-wrapper" onClick={() => setCurrentPage('upload')}>
+                <div className="circle-btn"><span className="circle-icon">📤</span></div>
+                <span className="circle-label">Manual Report</span>
               </div>
 
-              <div onClick={() => setCurrentPage("live")}>
-                📷 Live Camera
+              <div className="circle-btn-wrapper" onClick={() => setCurrentPage('live')}>
+                <div className="circle-btn"><span className="circle-icon">📷</span></div>
+                <span className="circle-label">Live Dashcam</span>
               </div>
-
-              <div onClick={() => setCurrentPage("map")}>
-                🗺️ Map
+              <div className="circle-btn-wrapper" onClick={() => setCurrentPage('map')}>
+                <div className="circle-btn"><span className="circle-icon">🗺️</span></div>
+                <span className="circle-label">Smart Map</span>
               </div>
-
-              <div onClick={() => setCurrentPage("admin")}>
-                🔐 Admin
+              <div className="circle-btn-wrapper" onClick={() => setCurrentPage('admin')}>
+                <div className="circle-btn"><span className="circle-icon">🔐</span></div>
+                <span className="circle-label">Authority Portal</span>
               </div>
 
             </div>
 
+          
+        
+
+         {/* --------------------------------------------------- */}
+            {/* NEW VIDEO SECTION */}
+            {/* --------------------------------------------------- */}
+            <div className="hero-video-container">
+              {/* autoPlay, loop, muted, and playsInline ensure it plays automatically on both desktop and mobile without user interaction */}
+              <video 
+                className="promo-video" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                controls // Adds play/pause buttons in case they want to watch it properly
+              >
+                {/* Points to the public/videos folder we created */}
+                <source src="/Detect-ALERT-Drivesafe.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className="hero-presentation-container">
+              <iframe 
+                src="https://prezi.com/p/embed/RImbgb22N3LvyiRRrFFX/" 
+                id="iframe_container" 
+                frameBorder="0" 
+                webkitAllowFullScreen 
+                mozAllowFullScreen 
+                allowFullScreen 
+                allow="autoplay; fullscreen" 
+                title="Pothole Patrol System Design"
+                className="promo-presentation"
+              ></iframe>
+            </div>
+            {/* --------------------------------------------------- */}
           </div>
         )}
 
@@ -233,7 +271,9 @@ function App() {
 
           <div className="page-container">
 
-            <button onClick={() => setCurrentPage("home")}>
+            <button onClick={() => setCurrentPage("home")} style={{ marginBottom: '20px', 
+            background: 'none', color: '#FFD700', border: '1px solid #FFD700', padding: '5px 15px', borderRadius: '4px', 
+            cursor: 'pointer' }}>
               ← Back
             </button>
 
@@ -245,6 +285,7 @@ function App() {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
+                className="file-input"
               />
 
               <input
@@ -254,9 +295,11 @@ function App() {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <button onClick={getLocation}>
-                📍 Get Location
-              </button>
+
+              <div style={{ margin: '15px 0' }}>
+                <button onClick={getLocation} style={{ padding: '8px 16px', cursor: 'pointer', borderRadius: '4px' }}>📍 Get My Location</button>
+                <p style={{ color: '#FFD700', margin: '10px 0' }}>{locationStatus}</p>
+              </div>
 
               <p>{locationStatus}</p>
 
@@ -279,31 +322,57 @@ function App() {
 
             {results && (
 
-              <div className="results-section">
-
-                <h2>Results</h2>
-
-                <h3>
-                  Detected: {results.pothole_count}
+              <div className="results-section" style={{ marginTop: '30px', padding: '20px', backgroundColor: '#1e1e1e', borderRadius: '12px', 
+              border: '1px solid #333', boxShadow: '0 8px 16px rgba(0,0,0,0.5)', width: '100%', maxWidth: '600px' }}>
+                <h2 style={{ color: '#FFD700', marginTop: 0, borderBottom: '1px solid #444', paddingBottom: '10px' }}>Detection Results</h2>
+                
+                <h3 style={{ margin: '15px 0' }}>
+                  Status: {results.pothole_count > 0 
+                    ? <span style={{ color: '#ff4d4d' }}>{results.pothole_count} Hazard(s) Detected</span> 
+                    : <span style={{ color: '#4CAF50' }}>Road Clear</span>}
                 </h3>
 
                 {results.output_image && (
-                  <div>
-
-                    <p>AI Detection</p>
-
-                    <img
-                      src={`data:image/jpeg;base64,${results.output_image}`}
-                      alt="AI Detection"
-                      style={{
-                        width: "100%",
-                        border: "2px dashed gold",
-                      }}
+                  <div style={{ margin: '20px 0', textAlign: 'center' }}>
+                    <p style={{ color: '#aaaaaa', margin: '0 0 5px 0', fontSize: '0.9rem' }}>AI Vision Output</p>
+                    <img 
+                      src={`data:image/jpeg;base64,${results.output_image}`} 
+                      alt="AI Bounding Boxes" 
+                      style={{ width: '100%', borderRadius: '8px', border: '2px dashed #FFD700' }}
                     />
-
                   </div>
                 )}
+                {/* Map through each individual pothole and display its stats! */}
+                {results.pothole_count > 0 && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
+                    {results.detections.map((pothole, index) => {
+                      
+                      // 🧮 MATH LOGIC: Convert raw AI data into readable real-world units
+                      const depthCm = (pothole.estimated_depth * 0.5).toFixed(1); 
+                      const areaSqCm = ((pothole.area_pixels / 1000) * (depthCm / 10)).toFixed(1);
+                      const confidencePercent = (pothole.confidence * 100).toFixed(0);
 
+                      // Determine color based on severity
+                      const severityColor = pothole.severity === 'Severe' ? '#ff4d4d' : pothole.severity === 'Medium' ? '#FFD700' : '#4CAF50';
+
+                      return (
+                        <div key={index} style={{ backgroundColor: '#2a2a2a', padding: '15px', borderRadius: '8px', borderLeft: `5px solid ${severityColor}`, textAlign: 'left' }}>
+                          <h4 style={{ margin: '0 0 10px 0', color: '#fff', display: 'flex', justifyContent: 'space-between' }}>
+                            <span>Pothole #{index + 1}</span>
+                            <span style={{ color: severityColor }}>{pothole.severity}</span>
+                          </h4>
+                          
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '0.95rem', color: '#dddddd' }}>
+                            <div><strong>🎯 AI Confidence:</strong> {confidencePercent}%</div>
+                            <div><strong>📏 Est. Depth:</strong> {depthCm} cm</div>
+                            <div><strong>📐 Approx. Area:</strong> {areaSqCm} cm²</div>
+                            {/* <div><strong>🛑 Action:</strong> {pothole.severity === 'Severe' ? 'Immediate' : 'Monitor'}</div> */}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
                 {results.image_url && (
                   <div>
 
@@ -330,12 +399,13 @@ function App() {
 
         {currentPage === "live" && (
 
-          <LiveCamera
-            onPotholeLogged={() => {
+          <div className="page-container" style={{ width: '100%' }}>
+            <button onClick={() => setCurrentPage('home')} style={{ marginBottom: '20px', background: 'none', color: '#FFD700', border: '1px solid #FFD700', padding: '5px 15px', borderRadius: '4px', cursor: 'pointer' }}>← Back to Home</button>
+            <LiveCamera onPotholeLogged={() => {
+              setMapRefreshKey(prev => prev + 1);
               fetchStats();
-              setMapRefreshKey((prev) => prev + 1);
-            }}
-          />
+            }} />
+          </div>
 
         )}
 
@@ -343,10 +413,11 @@ function App() {
 
         {currentPage === "map" && (
 
-          <PotholeMap
-            userLocation={location}
-            refreshTrigger={mapRefreshKey}
-          />
+          <div className="page-container" style={{ width: '100%', maxWidth: '1000px' }}>
+            <button onClick={() => setCurrentPage('home')} style={{ marginBottom: '20px', background: 'none', color: '#FFD700', border: '1px solid #FFD700', padding: '5px 15px', borderRadius: '4px', cursor: 'pointer' }}>← Back to Home</button>
+            <h2 style={{ color: '#FFD700', margin: 0 }}>City-Wide Pothole Map</h2>
+            <PotholeMap userLocation={location} refreshTrigger={mapRefreshKey} />
+          </div>
 
         )}
 
@@ -354,25 +425,31 @@ function App() {
 
         {currentPage === "admin" && (
 
-          <>
+           <div className="page-container" style={{ width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', width: '100%', maxWidth: '1100px' }}>
+                <button onClick={() => setCurrentPage('home')} style={{ background: 'none', color: '#FFD700', border: '1px solid #FFD700', padding: '5px 15px', borderRadius: '4px', cursor: 'pointer' }}>← Back to Home</button>
+                
+                {/* 🆕 NEW: Logout Button */}
+                {adminToken && (
+                  <button 
+                    onClick={() => { setAdminToken(null); localStorage.removeItem('adminToken'); }} 
+                    style={{ background: '#ff4d4d', color: '#fff', border: 'none', padding: '5px 15px', borderRadius: '4px', cursor: 'pointer' }}
+                  >
+                    Logout
+                  </button>
+                )}
+            </div>
+
+            {/* 🆕 NEW: Show Login if no token, otherwise show Dashboard */}
             {!adminToken ? (
-
-              <AdminLogin
-                onLoginSuccess={(token) => {
-                  setAdminToken(token);
-                  localStorage.setItem(
-                    "adminToken",
-                    token
-                  );
-                }}
-              />
-
+              <AdminLogin onLoginSuccess={(token) => {
+                setAdminToken(token);
+                localStorage.setItem('adminToken', token);
+              }} />
             ) : (
-
-              <AdminDashboard token={adminToken} />
-
+              <AdminDashboard token={adminToken} /> 
             )}
-          </>
+          </div>
 
         )}
 

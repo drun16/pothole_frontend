@@ -191,7 +191,7 @@ const LiveCamera = ({
         }
       },
 
-      [
+      [webcamRef,
         liveLocation,
         onPotholeLogged,
       ]
@@ -232,10 +232,10 @@ const LiveCamera = ({
         📷 Live AI Scanner
       </h2>
 
-      <p
+      <p style={{ color: liveLocation ? '#4CAF50' : '#ff4d4d', fontSize: '0.9rem' }}
         className={
           liveLocation
-            ? "gps-active"
+            ? `gps-active ${liveLocation.lat.toFixed(4)}, ${liveLocation.lng.toFixed(4)}`
             : "gps-wait"
         }
       >
@@ -254,7 +254,8 @@ const LiveCamera = ({
 
       </p>
 
-      <div className="camera-box">
+      <div className="camera-box" style={{ position: 'relative', width: '100%', maxWidth: '500px', margin: '0 auto', overflow: 'hidden', borderRadius: '8px', border: '2px dashed #FFD700' }}>
+       
 
         <Webcam
           ref={webcamRef}
@@ -287,6 +288,7 @@ const LiveCamera = ({
             !isDetecting
           )
         }
+        style={{ marginTop: '20px', padding: '12px 24px', backgroundColor: isDetecting ? '#ff4d4d' : '#FFD700', color: '#121212', fontWeight: 'bold', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
       >
 
         {isDetecting
@@ -300,9 +302,9 @@ const LiveCamera = ({
       {isDetecting &&
         liveResults && (
 
-        <div className="status-box">
+        <div className="status-box" style={{ marginTop: '20px', padding: '10px', backgroundColor: '#2a2a2a', borderRadius: '6px' }}>
 
-          <h3
+          <h3 style={{ margin: '0 0 10px 0', color: liveResults.pothole_count > 0 ? '#ff4d4d' : '#4CAF50' }}
 
             className={
               liveResults.pothole_count >
